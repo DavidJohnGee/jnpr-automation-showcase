@@ -100,9 +100,118 @@ To run this script:
 python demo2.py
 ```
 
-Finally, we can place configuration in numerous different ways. Through `Config`, and `ConfigTables` we can generate configuration changes and submit them to Junos.
+Finally, we can place configuration in different ways. Through `Config`, and `ConfigTables` we can generate configuration changes and submit them to Junos. It's also possible to place configuration in a 'traditional' way too.
+
+First, let's look at tables.
+
+Here's the code. Note, the actual table files are required for this. Some come with PyEZ and some require creation. You can find more information [here](https://www.juniper.net/documentation/en_US/junos-pyez/topics/reference/general/junos-pyez-tables-op-predefined.html) on tables. The actual table files are in this git repository under the `myTables` directory.
 
 ```python
-TODO
+import sys
+from getpass import getpass
+from jnpr.junos import Device
+from jnpr.junos.exception import ConnectError
+from myTables.ConfigTables import UserConfigTable
+
+hostname = input("Device hostname: ")
+username = input("Device username: ")
+password = getpass("Device password: ")
+
+dev = Device(host=hostname, user=username, passwd=password)
+
+try:
+    with Device(host=hostname, user=username, passwd=password) as dev:
+
+        userconf = UserConfigTable(dev)
+        userconf.user = 'pyez'
+        userconf.user_class = 'read-only'
+        userconf.password = '$ABC123'
+        userconf.append()
+
+        userconf.lock()
+        userconf.load(merge=True)
+        userconf.pdiff()
+
+        userconf.commit()
+        userconf.unlock()
+
+except ConnectError as err:
+    print ("Cannot connect to device: {0}".format(err))
+    sys.exit(1)
 ```
 
+To run this code:
+
+```bash
+python demo3.py
+```
+
+Demo four comprises of something which may look more familiar if you're a traditional network engineer.
+
+```python
+import sys
+from getpass import getpass
+from jnpr.junos import Device
+from jnpr.junos.utils.config import Config
+
+hostname = input("Device hostname: ")
+username = input("Device username: ")
+password = getpass("Device password: ")
+
+dev = Device(host=hostname, user=username, passwd=password).open()
+with Config(dev, mode='private') as cu:  
+    cu.load('set system services telnet', format='set')
+    cu.pdiff()
+    cu.commit()
+
+sys.exit(0)
+```
+
+To run this code:
+
+```bash
+python demo4.py
+```
+
+It's also possible to insert configuration data in `set` format, YAML, XML and JSON.
+
+Finally, let's look at how to template code using Jinja2 and PyEZ.
+
+```python
+import sys
+from getpass import getpass
+from jnpr.junos import Device
+from jnpr.junos.utils.config import Config
+
+config = {
+    'interfaces': ['ge-1/0/1', 'ge-1/0/2', 'ge-1/0/3'],
+    'description': 'MPLS interface',
+    'family': 'mpls'
+}
+
+hostname = input("Device hostname: ")
+username = input("Device username: ")
+password = getpass("Device password: ")
+
+dev = Device(host=hostname, user=username, passwd=password).open()
+with Config(dev, mode='private') as cu:
+    conf_file = "configs/junos-config-interfaces-mpls.conf"
+    cu.load(template_path=conf_file, template_vars=config, merge=True)
+
+    cu.pdiff()
+    cu.commit()
+
+sys.exit(0)
+```
+
+In order to run this demo:
+
+```python
+python demo5.py
+```
+
+## End of PyEZ Demos
+
+As you can see, there are lots of different ways of configuring and extracting information out of Junos using PyEZ.
+
+The documentation is excellent and there are tons of code examples around if you just exercise your Google powers!

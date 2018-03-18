@@ -1,0 +1,35 @@
+---
+UserTable:
+  get: system/login/user
+  view: UserView
+  
+UserView:
+  fields:
+    username: name
+    userclass: class
+
+ExtendedUserTable:
+  get: system/login/user
+  view: ExtendedUserView
+
+ExtendedUserView:
+  fields:
+    username: name
+    userclass: class
+    userid: uid
+
+UserConfigTable:
+  set: system/login/user
+  key-field:
+    user
+  required_keys:
+    user: name
+  view: UserConfigView
+
+UserConfigView:
+  fields:
+    user: name
+    user_class: class
+    uid: uid
+    password: authentication/encrypted-password
+    fullname: full-name
