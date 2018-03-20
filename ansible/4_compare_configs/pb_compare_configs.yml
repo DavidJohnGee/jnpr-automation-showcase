@@ -1,0 +1,24 @@
+---
+- name: "Compare configuration"
+  hosts: vMX
+  roles:
+    - Juniper.junos
+  connection: local
+  gather_facts: no
+  vars_prompt:
+    - name: "ROLLBACK"
+      prompt: "Rollback ID to compare with active configuration" 
+      private: no
+  tasks:
+    - name: "Compare active to previous configuration"
+      juniper_junos_config:
+        provider: "{{ credentials }}"
+        rollback: "{{ ROLLBACK }}"    
+        diff: true
+        diffs_file: "{{ inventory_hostname }}-diff-rollback-{{ ROLLBACK }}"
+        check: false
+        commit: false
+      register: response
+    - name: "Print diff"
+      debug:
+        var: response

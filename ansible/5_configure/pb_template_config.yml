@@ -1,0 +1,22 @@
+---
+- name: Load and commit configuration 
+  hosts: vMX01
+  roles:
+    - Juniper.junos
+  connection: local
+  gather_facts: no
+  tasks:
+    - name: Load a configuration from a Jinja2 template and commit
+      juniper_junos_config:
+        provider: "{{ credentials }}"
+        load: "merge"
+        template: "build_conf/{{ inventory_hostname }}/interfaces-mpls.j2"
+        format: "text"
+        vars:
+          interfaces: ["ge-1/0/1", "ge-1/0/2", "ge-1/0/3"]
+          description: "MPLS interface"
+          family: "mpls"
+      register: response
+    - name: Print the response
+      debug:
+        var: response

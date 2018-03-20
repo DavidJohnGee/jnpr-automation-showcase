@@ -1,0 +1,16 @@
+---
+ - name: Retrieve configuration from Junos devices
+   hosts: vMX
+   roles:
+    - Juniper.junos
+   connection: local
+   gather_facts: no
+
+   tasks:
+   - name: Retrieve configuration from Junos devices
+     junos_get_config:
+      provider: "{{ credentials }}"
+      dest: "{{ playbook_dir }}/configs/{{ inventory_hostname }}.conf"
+      format: text
+      logfile: "{{ playbook_dir }}/junos_get_config.log"
+      filter: system

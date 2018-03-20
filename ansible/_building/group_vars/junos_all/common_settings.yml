@@ -1,0 +1,6 @@
+---
+login_message: This is the banner put in by Ansible
+time_zone: Europe/London
+name_servers:
+- 8.8.8.8
+- 8.8.8.4

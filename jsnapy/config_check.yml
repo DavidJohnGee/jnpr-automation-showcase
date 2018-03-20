@@ -1,0 +1,7 @@
+# Example from JNSAPy guide.
+hosts:
+  - device: vMX01
+    username : netconf
+    passwd: Passw0rd
+tests:
+  - test_no_diff.yml 

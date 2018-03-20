@@ -1,0 +1,22 @@
+---
+ - name: Get Facts
+   hosts: vMX01
+   roles:       
+    - Juniper.junos
+   connection: local
+   gather_facts: no
+   
+   tasks:
+    
+   - name: create inventory directory
+     file: 
+       path: "{{playbook_dir}}/inventory" 
+       state: directory
+     
+   - name: Retrieve information from devices running Junos
+     junos_get_facts:
+       provider: "{{ credentials }}"
+       savedir: "{{playbook_dir}}/inventory"
+     register: junos
+
+

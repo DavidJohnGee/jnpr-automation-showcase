@@ -1,0 +1,15 @@
+---
+- name: Get device information
+  hosts: vMX
+  roles:
+    - Juniper.junos
+  connection: local
+  gather_facts: no
+  tasks:
+    - name: Get software and uptime information
+      juniper_junos_rpc:  
+        provider: "{{ credentials }}"
+        rpcs: 
+          - "get-software-information"        
+          - "get-system-uptime-information"
+        dest_dir: "{{ playbook_dir }}"     

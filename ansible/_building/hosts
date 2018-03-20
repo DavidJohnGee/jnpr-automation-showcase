@@ -1,0 +1,5 @@
+[junos_all:children]
+vMX
+
+[vMX]
+vMX01 junos_host=10.42.0.130

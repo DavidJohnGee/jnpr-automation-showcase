@@ -1,0 +1,23 @@
+---
+- name: Load and commit configuration 
+  hosts: vMX
+  roles:
+    - Juniper.junos
+  connection: local
+  gather_facts: no
+  tasks:
+    - name: Load configuration data using strings and commit
+      juniper_junos_config:
+        provider: "{{ credentials }}"
+        load: "merge"
+        lines:  
+          - |
+            system { 
+              services {
+                telnet
+              }
+            }
+      register: response
+    - name: Print the response
+      debug:
+        var: response

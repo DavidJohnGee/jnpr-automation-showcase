@@ -1,0 +1,19 @@
+---
+- name: "Configure Device" 
+  hosts: vMX
+  roles:
+    - Juniper.junos
+  connection: local
+  gather_facts: no
+  tasks:
+    - name: "Configure services telnet"
+      juniper_junos_config:
+        provider: "{{ credentials }}"
+        config_mode: "private"
+        load: "set"
+        lines:
+          - "set system services telnet"
+      register: response
+    - name: "Print the config changes"
+      debug:
+        var: response.diff_lines
