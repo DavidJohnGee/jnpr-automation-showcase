@@ -1,0 +1,23 @@
+{
+    "host": "10.42.0.130",
+    "port": 50051,
+    "user": "netconf",
+    "password": "Passw0rd",
+    "cid": "jtimon1",
+    "grpc" : {
+        "ws" : 524288
+    },
+    "paths": [{
+        "path": "/interfaces",
+        "freq": 2000
+    }, {
+        "path": "/junos/system/linecard/cpu/memory/",
+        "freq": 1000
+    }, {
+        "path": "/bgp",
+        "freq": 10000
+    }, {
+        "path": "/components",
+        "freq": 10000
+    }]
+}
