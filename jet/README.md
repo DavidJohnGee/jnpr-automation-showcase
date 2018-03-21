@@ -109,6 +109,17 @@ In order to get `protoc`, download it from [GitHub](https://github.com/google/pr
 
 For this demo, I'm using a container that also acts as a build environment for the `.proto` files. Instructions to run this container live [here](https://github.com/mwiget/jet-bgp-static-routes).
 
+This demo also requires the following configuration on the vMX:
+
+```bash
+set system services extension-service request-response grpc clear-text port 50051
+set routing-options programmable-rpd purge-timeout 120
+set routing-options autonomous-system 64512
+set protocols bgp group internal type internal
+set protocols bgp group internal family inet unicast add-path send path-count 6
+set protocols bgp group internal allow 0.0.0.0/0
+```
+
 To run this demo, cd to the jetcontainer directory, in my case: `/Users/dgee/Documents/JET/jetcontainer`.
 
 ```bash
@@ -117,7 +128,21 @@ make shell
 ./offboxdemoapp.py
 ```
 
-For demo2, a much more complex demo:
+
+## Demo 2
+
+This next demo places BGP routes with multiple-next hops in to Junos through the JET API! Pretty cool.
+
+For this demo to work, we also need this configuration in place:
+
+```bash
+set system services extension-service request-response grpc clear-text port 50051
+set routing-options programmable-rpd purge-timeout 120
+set routing-options autonomous-system 64512
+set protocols bgp group internal type internal
+set protocols bgp group internal family inet unicast add-path send path-count 6
+set protocols bgp group internal allow 0.0.0.0/0
+```
 
 ```bash
 ./jroutes_bgp.py --t 10.42.0.130 --port 50051 --user netconf --pass Passw0rd
