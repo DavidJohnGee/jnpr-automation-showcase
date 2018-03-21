@@ -71,6 +71,12 @@ Run through each demo and observe changes.
 
 Run each playbook from the Ansible root directory and ensure that `/etc/ansible` has been populated with group_vars and host information. 
 
+It's also easy to inspect what variables are available to Ansible for a host by running the following command. It's a great trouble shooting step!
+
+```bash
+ansible -m debug -a "var=hostvars['vMX01']" localhost
+```
+
 ```bash
 cd /demos/ansible/
 ansible-playbook <dir>/pb*.yaml
