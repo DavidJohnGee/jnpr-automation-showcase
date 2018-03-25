@@ -4,6 +4,9 @@
     "user": "netconf",
     "password": "Passw0rd",
     "cid": "jtimon1",
+    "api": {
+        "port": 8091
+    },
     "grpc" : {
         "ws" : 524288
     },
