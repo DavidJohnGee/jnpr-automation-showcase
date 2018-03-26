@@ -123,7 +123,7 @@ It's possible to see what sensors are configured in Junos for us to take telemet
 show agent sensors
 ```
 
-The next step is to install OpenNTI using the installation guide [here](TODO: LINK).
+The next step is to install OpenNTI using the installation guide [here](http://open-nti.readthedocs.io/en/latest/install.html).
 Once OpenNTI is installed, there are several steps of configuration on Junos that require committing along with some OpenNTI specific configuration.
 
 ```bash
@@ -144,6 +144,8 @@ set services analytics sensor "Demo sensor" resource /junos/system/linecard/inte
 The configuration is fairly straight forward. First, configure a streaming server. Next, configure an export-profile. Finally, configure a sensor. One sensor is related to one resource. If you want more than one exported data set, then configure multiple sensors.
 
 In order to configure the rest of OpenNTI, follow the instruction guides. It is possible for OpenNTI to query a Junos device for XML information, allowing different dashboards to be created from different sourced metrics.
+
+It's also possible to use the IDL files (.proto) to decode captured information. If you want to take a peak at what the data looks like pre-decoding and post, follow [this](https://www.juniper.net/documentation/en_US/junos/topics/reference/general/junos-telemetry-interface-decoding-data.html) guide.
 
 ## Close
 
