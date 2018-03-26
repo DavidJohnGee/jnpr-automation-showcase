@@ -147,6 +147,35 @@ In order to configure the rest of OpenNTI, follow the instruction guides. It is 
 
 It's also possible to use the IDL files (.proto) to decode captured information. If you want to take a peak at what the data looks like pre-decoding and post, follow [this](https://www.juniper.net/documentation/en_US/junos/topics/reference/general/junos-telemetry-interface-decoding-data.html) guide.
 
+
+Once you have OpenNTI setup, it's possible to check InfluxDB for what data is streaming to and being collected by OpenNTI.
+
+Open up your browser to the OpenNTI IP address and to port 8083. You should be met by the InfluxDB query page. Run the following queries:
+
+```bash
+SHOW MEASUREMENTS
+SELECT * FROM 'jnpr.jvision' WHERE device='' ORDER BY time DESC LIMIT 5
+Once you have OpenNTI setup, it's possible to check InfluxDB for what data is streaming to and being collected by OpenNTI.
+
+Open up your browser to the OpenNTI IP address and to port 8083. You should be met by the InfluxDB query page. Run the following queries as a simple example.
+
+```bash
+SHOW MEASUREMENTS
+SELECT * FROM "jnpr.jvision" ORDER BY time DESC LIMIT 5
+```
+
+In my case I can further run these queries:
+
+```bash
+SELECT * FROM "jnpr.jvision" WHERE device=~ /vmx01/ ORDER BY time DESC LIMIT 5
+```
+
+In addition to streaming the native sensor data to OpenNTI you can also stream the OpenConfig data by having OpenNTI subscribe to the feed using GRPC.
+
+More information on that [here](https://techmocha.blog/2017/08/21/using-opennti-as-a-collector-for-streaming-telemetry-from-juniper-devices-part-3/).
+
+
+
 ## Close
 
 The most import thing to remember with the JTI is there are two different data models for two different things.
