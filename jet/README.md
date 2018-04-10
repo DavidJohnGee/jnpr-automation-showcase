@@ -159,6 +159,14 @@ python /home/davidgee/demos/jet/jet-app-store/JET-Tutorial-Apps/sampleNotifierAp
 It connects up for a number of seconds and then it will disconnect.
 The code for this simple demo application lives [here](https://github.com/Juniper/jet-app-store/blob/master/JET-Tutorial-Apps/sampleNotifierApp.py).
 
+## Golang
+
+For those who know me, I am a huge lover of Google's Go language. I took Marcel Wiget's original demo code and re-created it in Go! The binary is in this directory and the source code is located [here](https://github.com/DavidJohnGee/go-jet-demo-app).
+
+```bash
+./bgpStaticRoutes
+```
+
 ## Demo Close
 
 JET provides useful APIs and a notification API. When a standard approach fails, JET might be the answer!
