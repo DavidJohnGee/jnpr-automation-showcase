@@ -150,13 +150,6 @@ It's also possible to use the IDL files (.proto) to decode captured information.
 
 Once you have OpenNTI setup, it's possible to check InfluxDB for what data is streaming to and being collected by OpenNTI.
 
-Open up your browser to the OpenNTI IP address and to port 8083. You should be met by the InfluxDB query page. Run the following queries:
-
-```bash
-SHOW MEASUREMENTS
-SELECT * FROM 'jnpr.jvision' WHERE device='' ORDER BY time DESC LIMIT 5
-Once you have OpenNTI setup, it's possible to check InfluxDB for what data is streaming to and being collected by OpenNTI.
-
 Open up your browser to the OpenNTI IP address and to port 8083. You should be met by the InfluxDB query page. Run the following queries as a simple example.
 
 ```bash
@@ -168,6 +161,7 @@ In my case I can further run these queries:
 
 ```bash
 SELECT * FROM "jnpr.jvision" WHERE device=~ /vmx01/ ORDER BY time DESC LIMIT 5
+SELECT * FROM "jnpr.jvision" WHERE device=~ /vmx01/ and type=~ /packets/ ORDER BY time DESC LIMIT 10
 ```
 
 In addition to streaming the native sensor data to OpenNTI you can also stream the OpenConfig data by having OpenNTI subscribe to the feed using GRPC.
