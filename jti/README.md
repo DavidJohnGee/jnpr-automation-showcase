@@ -162,12 +162,24 @@ In my case I can further run these queries:
 ```bash
 SELECT * FROM "jnpr.jvision" WHERE device=~ /vmx01/ ORDER BY time DESC LIMIT 5
 SELECT * FROM "jnpr.jvision" WHERE device=~ /vmx01/ and type=~ /packets/ ORDER BY time DESC LIMIT 10
+SELECT * FROM "jnpr.jvision" WHERE device = 'vmx01:81.138.165.210' and type=~ /packets/ ORDER BY time DESC LIMIT 10
+SELECT * FROM "jnpr.jvision" WHERE device = 'vmx01:81.138.165.210' and type = 'egress_queue_info.packets' and interface = 'ge-0/0/1' ORDER BY time DESC LIMIT 10
 ```
 
 In addition to streaming the native sensor data to OpenNTI you can also stream the OpenConfig data by having OpenNTI subscribe to the feed using GRPC.
 
 More information on that [here](https://techmocha.blog/2017/08/21/using-opennti-as-a-collector-for-streaming-telemetry-from-juniper-devices-part-3/).
 
+If you have configured collection of this kind of data, the InfluxDB query 'SHOW MEASUREMENTS' will show OpenConfig paths like:
+
+```bash
+```
+
+This also means you can run queries against that collected data and graph it.
+
+```bash
+SELECT * FROM "/junos/system/linecard/packet/usage/" ORDER BY time DESC LIMIT 5
+```
 
 
 ## Close

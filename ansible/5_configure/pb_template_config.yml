@@ -13,7 +13,7 @@
         template: "build_conf/{{ inventory_hostname }}/interfaces-mpls.j2"
         format: "text"
         vars:
-          interfaces: ["ge-1/0/1", "ge-1/0/2", "ge-1/0/3"]
+          interfaces: "{{ hostvars['vMX01'].interfaces }}"
           description: "MPLS interface"
           family: "mpls"
       register: response
