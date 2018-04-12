@@ -35,3 +35,7 @@ Pages are presented on port 5678:
 go build -o ./readme github.com/ryanuber/readme-server
 ./readme -dont-open
 ```
+
+## Constantly Being Updated
+
+Remember to check back here regularly! Content is always being worked on.
