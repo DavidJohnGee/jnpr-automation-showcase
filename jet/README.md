@@ -167,7 +167,7 @@ For those who know me, I am a huge lover of Google's Go language. I took Marcel 
 ./bgpStaticRoutes
 ```
 
-Ensure you change the contents of the `config.toml` file to reflect the settings of your environment and change the routes being injected.
+Ensure you change the contents of the `example_config.toml` file to reflect the settings of your environment and change the routes being injected and rename it to `config.toml`.
 
 ## Demo Close
 
