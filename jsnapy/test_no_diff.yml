@@ -5,5 +5,6 @@ test_interface_status:
       id: './name'
       tests:
         - no-diff: admin-status
-          err: "Test Failed!! admin-status  got changed, before it was <{{pre['admin-status']}}>, now it is <{{post['admin-status']}}>"
+          err: "Test Failed!! admin-status  got changed, before it was
+               <{{pre['admin-status']}}>, now it is <{{post['admin-status']}}>"
           info: "Test Passed!! admin-status is same, before it is <{{pre['admin-status']}}> now it is <{{post['admin-status']}}>"

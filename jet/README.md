@@ -167,6 +167,8 @@ For those who know me, I am a huge lover of Google's Go language. I took Marcel 
 ./bgpStaticRoutes
 ```
 
+Ensure you change the contents of the `config.toml` file to reflect the settings of your environment and change the routes being injected.
+
 ## Demo Close
 
 JET provides useful APIs and a notification API. When a standard approach fails, JET might be the answer!
